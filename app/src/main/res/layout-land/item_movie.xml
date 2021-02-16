@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
 
     <ImageView
         android:id="@+id/ivPoster"
@@ -34,6 +35,8 @@
         android:layout_below="@+id/tvTitle"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="6"
         android:layout_toEndOf="@+id/ivPoster"
         tools:text="A spinoff of The Fate of the Furious, focusing on Johnson's US Diplomatic Security Agent Luke Hobbs forming an unlikely alliance with Stantham's Deckard Shaw" />
 
