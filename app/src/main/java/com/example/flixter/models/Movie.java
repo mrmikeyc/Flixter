@@ -5,16 +5,25 @@ import com.facebook.stetho.common.ArrayListAccumulator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// Add the parcel tag so that we know we are expecting to parcelable this object
+@Parcel
 public class Movie {
 
+    int movieId;
     String posterPath;
     String title;
     String overview;
     String backdropPath;
+    double rating;
+
+    public Movie() {
+        // Empty constructor needed by the Parcel Library
+    }
 
     // Create a constructor for the movie object that takes a JSONObject
     // We then want to read the json object and pull out the portions associated with the given keys
@@ -23,6 +32,8 @@ public class Movie {
         backdropPath = jsonObject.getString("backdrop_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
+        rating = jsonObject.getDouble("vote_average");
+        movieId = jsonObject.getInt("id");
     }
 
     // This static method will ingest the JSON array and create a list of movies from it
@@ -55,6 +66,14 @@ public class Movie {
     // Again, ideally you would tap the API in order to get the right resolution, but we hard coded it for this assignment
     public String getBackdropPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", backdropPath);
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public int getMovieId() {
+        return movieId;
     }
 }
 

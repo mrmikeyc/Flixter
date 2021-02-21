@@ -1,20 +1,26 @@
 package com.example.flixter.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.flixter.DetailActivity;
 import com.example.flixter.R;
 import com.example.flixter.models.Movie;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -68,6 +74,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     // First define an inner viewHolder class - this will be the representation of the item_movie.xml 'row' that we made
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        // This relative layout will find the ID of the Relative Layout defined for the item_movie.xml files (land/port)
+        RelativeLayout container;
         TextView tvTitle;
         TextView tvOverview;
         ImageView ivPoster;
@@ -78,6 +86,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            container = itemView.findViewById(R.id.container);
         }
 
         public void bind(Movie movie) {
@@ -99,6 +108,28 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             // Need to render an image, so we'll use a library for that - Glide
             Glide.with(context).load(imageURL).into(ivPoster);
             // Recall that movie.getPosterPath() returns a URL to an image that it gets from an API
+
+
+            // 1. Register the click listener on the whole container (row) - Mark the xml layout with an ID, and access that ID here
+            // 2. Action taken when we tap to navigate to the details view
+            container.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // Place the navigation for the intent in this location
+                    Intent i = new Intent(context, DetailActivity.class);
+
+                    // We ideally would want to pass in the entire movie to the intent so that we have access to the entire movie object
+                    // In order to do this, we have to use PARCELABLE!!! (or serializable, but parcelable is better)
+                    // We will use a third party Parcelable library that we imported in our dependencies
+                    i.putExtra("MOVIE", Parcels.wrap(movie));
+
+                    // Toasts are nice ways to get info when debugging or testing an app
+                    Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
+
+                    context.startActivity(i);
+                }
+            });
         }
     }
 }

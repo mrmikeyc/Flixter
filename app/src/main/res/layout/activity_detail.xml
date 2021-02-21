@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/LayoutMargin"
+    tools:context=".DetailActivity">
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/player"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+
+    <TextView
+        android:id="@+id/tvTitle_Details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="55dp"
+        tools:text="Wonder Woman 1984" />
+
+    <RatingBar
+        android:id="@+id/ratingBar_Details"
+        style="?android:ratingBarStyleSmall"
+        android:layout_gravity="center_horizontal"  
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:numStars="10"
+        tools:rating="6.5" />
+
+    <TextView
+        android:id="@+id/tvOverview_Details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Some movie content that we will display to the user.  This will be the description of the movie that we display during the home screen of the application.  It was often truncated when it was on the home screen because things weren't big enough, but now that we are in the details view, we will use the entire description!!!" />
+</LinearLayout>
